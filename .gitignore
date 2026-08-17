@@ -1,0 +1,3 @@
+# Shared ignores; ai-agent-web and ai-agent-back have their own .gitignore.
+node_modules/
+*.log
