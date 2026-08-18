@@ -10,6 +10,10 @@ COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund --strict-ssl=false
 
 COPY . .
+# next/font/google downloads the Geist fonts during the build and hits the same
+# TLS inspection. Node's fetch has no --strict-ssl equivalent, so relax it here.
+# Scoped to this stage — the runtime image below does not inherit it.
+ENV NODE_TLS_REJECT_UNAUTHORIZED=0
 RUN npm run build
 
 FROM node:22-alpine
