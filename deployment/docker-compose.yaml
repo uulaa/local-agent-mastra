@@ -73,7 +73,7 @@ services:
 
   # One-shot: embed the docs in ai-agent-back/docs into Qdrant.
   ingest:
-    build: ../ai-agent-back
+    build: ../back
     command: ["npm", "run", "ingest"]
     environment:
       QDRANT_URL: http://qdrant:6333
@@ -91,7 +91,7 @@ services:
 
   # ── Mastra backend ───────────────────────────────────────────────────────
   back:
-    build: ../ai-agent-back
+    build: ../back
     environment:
       HOST: 0.0.0.0
       PORT: 4111
@@ -118,7 +118,7 @@ services:
 
   # ── Next.js frontend ─────────────────────────────────────────────────────
   web:
-    build: ../ai-agent-web
+    build: ../web
     environment:
       MASTRA_URL: http://back:4111
       MASTRA_AGENT_ID: company-agent
