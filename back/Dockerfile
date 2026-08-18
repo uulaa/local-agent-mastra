@@ -6,7 +6,9 @@ FROM node:22-alpine
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci --no-audit --no-fund
+# --strict-ssl=false: the corporate FortiGate does TLS inspection, so the
+# registry cert is re-signed by a CA the image doesn't trust.
+RUN npm ci --no-audit --no-fund --strict-ssl=false
 
 COPY . .
 RUN npm run build
